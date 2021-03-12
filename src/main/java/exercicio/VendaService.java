@@ -31,6 +31,7 @@ public class VendaService {
         // 1 (2P) - DIP - Criar Interface de Repositorio de Produto e injeta-la no construtor
         // Obs: Fazer o new na Classe Main
         // Utilizar o exemplo do repositorio de produto
+        Integer idDoCliente = EntradaTerminal.entradaInteira("Escolha o cliente!\n 1 - Sabino (PF)\n 2 - Gabriel (PJ)\n 3 - Isadora (FUNC)\n 4 - Ronaldo (FUNC)");
         RepositorioArrayDeCliente repositorioArrayDeCliente = new RepositorioArrayDeCliente();
         Cliente cliente = repositorioArrayDeCliente.buscarPeloId(idDoCliente);
 
