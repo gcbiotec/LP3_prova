@@ -28,17 +28,20 @@ public class VendaService {
         Integer idDoProduto = EntradaTerminal.entradaInteira("Escolha o seu produto!\n 1 - Camisa\n 2 - Calça\n 3 - Meia");
         Produto produto = repositorioDeProduto.buscarPeloId(idDoProduto);
 
-        // 1 (2P) - DIP - Criar Interface de Repositorio de Produto e injeta-la no construtor
+        // 1 (2P) - DIP - Criar Interface de Repositorio de Cliente e injeta-la no construtor
         // Obs: Fazer o new na Classe Main
         // Utilizar o exemplo do repositorio de produto
         Integer idDoCliente = EntradaTerminal.entradaInteira("Escolha o cliente!\n 1 - Sabino (PF)\n 2 - Gabriel (PJ)\n 3 - Isadora (FUNC)\n 4 - Ronaldo (FUNC)");
         RepositorioArrayDeCliente repositorioArrayDeCliente = new RepositorioArrayDeCliente();
         Cliente cliente = repositorioArrayDeCliente.buscarPeloId(idDoCliente);
 
-        // 2 (1P) - Acoplamento e testabilidade - Extrair New da classe Venda para a classe Main e Injeta-la no construtor
+        // Standby - 2 (1P) - Acoplamento e testabilidade - Extrair New da classe Venda para a classe Main e Injeta-la no construtor
+        // Vou botar outra classe para treinar a injeção de dependencia
+
+        // Deixa aqui a venda!
         Venda venda = new Venda(cliente, produto);
 
-        // 3 (1P) - Agrupar Acoplamento - Separar classes de validacoes em uma classe com a responsabilidade de instancia-las
+        // 3 (1P) - Agrupar Acoplamento - Separar classes de validacoes em uma classe com a responsabilidade de instancia-las e usa-las
         new ValidarProdutoNulo().validar(venda);
         new ValidarCreditoCliente().validar(venda);
         new ValidarQuantidadeProdutoEmEstoque().validar(venda);
@@ -66,7 +69,7 @@ public class VendaService {
         }
 
         // Pontos extras
-        // 6 (0,3P) - Aplicar encapsulamento mandando o cliente diminuir determinado valor em um metodo interno
+        // 6 (0,3P) - Aplicar encapsulamento mandando o cliente diminuir determinado valor em um metodo interno do Cliente
         cliente.setCredito(cliente.getCredito() - produto.getPreco());
 
         // 7 (0,3P) - Aplicar encapsulamento mandando o produto diminuor 1 quantidade (diminuir estoque)

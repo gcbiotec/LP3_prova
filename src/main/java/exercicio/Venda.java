@@ -12,4 +12,5 @@ public class Venda {
         this.produto = produto;
         this.cliente = cliente;
     }
+
 }
