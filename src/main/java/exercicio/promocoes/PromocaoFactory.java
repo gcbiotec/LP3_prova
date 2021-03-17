@@ -10,8 +10,10 @@ public class PromocaoFactory {
 
         if (PESSOAFISICA.equals(tipoCliente)) {
             return new PromocaoPessoaFisica();
+
         } else if (PESSOAJURIDICA.equals(tipoCliente)) {
             return new PromocaoPessoaJuridica();
+
         } else if (FUNCIONARIO.equals(tipoCliente)) {
             return new PromocaoFuncionario();
         }
