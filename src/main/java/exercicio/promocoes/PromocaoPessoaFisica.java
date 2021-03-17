@@ -3,9 +3,13 @@ package exercicio.promocoes;
 import exercicio.Venda;
 import exercicio.models.produto.Produto;
 
-public class PromocaoPessoaFisica {
+public class PromocaoPessoaFisica implements PromocaoInterface{
 
-    public void aplicar(Produto produto){
-        produto.setPreco(produto.getPreco() - 10);
+
+    @Override
+    public void criarPromo(Venda venda) {
+
+        venda.produto.setPreco(venda.produto.getPreco() - 10);
+
     }
 }

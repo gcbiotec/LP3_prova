@@ -5,8 +5,8 @@ import exercicio.models.produto.Produto;
 
 public class AplicaImpostoServico {
 
-    public void aplicarImpostoServico(Produto produto, Venda venda){
+    public void aplicarImpostoServico(Venda venda){
         System.out.println("Aplicando imposto de serviço");
-        produto.setPreco(venda.produto.getPreco() + 20);
+        venda.produto.setPreco(venda.produto.getPreco() + 20);
     }
 }

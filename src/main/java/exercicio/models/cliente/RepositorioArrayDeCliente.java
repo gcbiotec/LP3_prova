@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import static exercicio.models.cliente.TipoCliente.*;
 
-public class RepositorioArrayDeCliente {
+public class RepositorioArrayDeCliente implements RepositorioDeClienteInterface{
 
     private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 

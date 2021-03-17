@@ -1,10 +1,14 @@
 package exercicio.promocoes;
 
+import exercicio.Venda;
 import exercicio.models.produto.Produto;
 
-public class PromocaoFuncionario {
+public class PromocaoFuncionario implements PromocaoInterface {
 
-    public void aplicar(Produto produto){
-        produto.setPreco(produto.getPreco() - 30);
+    @Override
+    public void criarPromo(Venda venda) {
+
+        venda.produto.setPreco(venda.produto.getPreco() - 30);
+
     }
 }

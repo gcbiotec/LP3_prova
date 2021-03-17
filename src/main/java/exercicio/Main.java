@@ -32,8 +32,6 @@ public class Main {
 
         InterfaceValidacoes validacoes = new Validacoes();
 
-        PromocaoInterface promocao = PromocaoFactory.criarPromo(cliente.getTipo());
-
         // Chamada o metodo do serviço
         vendaService.processarVenda(validacoes);
     }

@@ -12,11 +12,14 @@ public class Venda {
         this.produto = produto;
         this.cliente = cliente;
     }
-    public void diminuirCreditoCliente() {
-        cliente.setCredito(cliente.getCredito() - produto.getPreco())
-    }
-    public void apresentarAtributosDaVenda() {
-        System.out.print("=====\nValor do produto na Venda: " + venda.produto.getPreco() + "\n");
-        System.out.print("Credito do cliente na Venda: " + venda.cliente.getCredito() + "\n=====\n");
 
+    public void diminuirCreditoCliente() {
+        cliente.setCredito(cliente.getCredito() - produto.getPreco());
+    }
+
+    public void apresentarAtributosDaVenda() {
+        System.out.print("=====\nValor do produto na Venda: " + this.produto.getPreco() + "\n");
+        System.out.print("Credito do cliente na Venda: " + this.cliente.getCredito() + "\n=====\n");
+
+    }
 }

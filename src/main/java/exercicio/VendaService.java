@@ -8,10 +8,7 @@ import exercicio.models.impostos.AplicaImpostoPadrao;
 import exercicio.models.impostos.AplicaImpostoServico;
 import exercicio.models.produto.Produto;
 import exercicio.models.produto.RepositorioDeProdutoInterface;
-import exercicio.promocoes.PromocaoFuncionario;
-import exercicio.promocoes.PromocaoInterface;
-import exercicio.promocoes.PromocaoPessoaFisica;
-import exercicio.promocoes.PromocaoPessoaJuridica;
+import exercicio.promocoes.*;
 import exercicio.validacoes.InterfaceValidacoes;
 import exercicio.validacoes.ValidarCreditoCliente;
 import exercicio.validacoes.ValidarProdutoNulo;
@@ -33,7 +30,7 @@ public class VendaService {
         this.repositorioDeCliente = repositorioDeCliente;
     }
 
-    public void processarVenda(InterfaceValidacoes validacoes, PromocaoInterface promocaoInterface){
+    public void processarVenda(InterfaceValidacoes validacoes){
         Integer idDoProduto = EntradaTerminal.entradaInteira("Escolha o seu produto!\n 1 - Camisa\n 2 - Calça\n 3 - Meia");
         Produto produto = repositorioDeProduto.buscarPeloId(idDoProduto);
 
@@ -43,6 +40,7 @@ public class VendaService {
 
         Integer idDoCliente = EntradaTerminal.entradaInteira("Escolha o cliente!\n 1 - Sabino (PF)\n 2 - Gabriel (PJ)\n 3 - Isadora (FUNC)\n 4 - Ronaldo (FUNC)");
         Cliente cliente = repositorioDeCliente.buscarPeloId(idDoCliente);
+
         //RepositorioArrayDeCliente repositorioArrayDeCliente = new RepositorioArrayDeCliente();
         //Cliente cliente = repositorioArrayDeCliente.buscarPeloId(idDoCliente);
         //------------------------------------------------------------------------------------------------------------
@@ -63,13 +61,11 @@ public class VendaService {
         // 4) (2P) - SRP - Criar classes separadas para cada imposto
         // Responsabilidade: Calcular cada imposto separadamente em sua classe
         if(PADRAO.equals(produto.getTipo())){
-            AplicaImpostoPadrao aplicaImpostoPadrao();
-//            System.out.println("Aplicando imposto padrao");
-//            produto.setPreco(venda.produto.getPreco() + 10);
+            new AplicaImpostoPadrao().aplicarImpostoPadrao(venda);
+//
         } else if(SERVICO.equals(venda.produto.getTipo())){
-            AplicaImpostoServico aplicaImpostoServico();
-//            System.out.println("Aplicando imposto de serviço");
-//            produto.setPreco(venda.produto.getPreco() + 20);
+            new AplicaImpostoServico().aplicarImpostoServico(venda);
+//
         }
 
         // 5) (4P) - SRP e DIP - Aplicar Factory e Strategy em promoção
@@ -83,7 +79,8 @@ public class VendaService {
 //        } else if(FUNCIONARIO.equals(cliente.getTipo())){
 //            new PromocaoFuncionario().aplicar(venda.produto);
 //        }
-        promocaoInterface.criarPromo(venda);
+        PromocaoInterface promocao = PromocaoFactory.criarPromo(venda.cliente.getTipo());
+        promocao.criarPromo(venda);
 
         // Pontos extras
         // 6) (0,3P) - Aplicar encapsulamento mandando o cliente diminuir determinado valor em um metodo interno do Cliente
@@ -96,10 +93,7 @@ public class VendaService {
         venda.apresentarAtributosDaVenda();
 
         // 9) (1P) - Refatoração e testes livres
-    }
 
-//    private void apresentarAtributosDaVenda(Venda venda) {
-//        System.out.print("=====\nValor do produto na Venda: " + venda.produto.getPreco() + "\n");
-//        System.out.print("Credito do cliente na Venda: " + venda.cliente.getCredito() + "\n=====\n");
     }
 }
+
