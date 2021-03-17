@@ -75,4 +75,8 @@ public class Produto {
         result = 31 * result + (preco != +0.0f ? Float.floatToIntBits(preco) : 0);
         return result;
     }
+
+    public void diminuirQtdProdutoDoEstoque() {
+        setQuantidade(getQuantidade() - 1);
+    }
 }
